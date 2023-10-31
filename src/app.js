@@ -7,6 +7,7 @@ import cookieParse from 'cookie-parser'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
 import compression from 'compression'
+import createHttpError from 'http-errors';
 
 //dotenv config
 dotenv.config()
@@ -48,6 +49,17 @@ app.use(fileUpload({
 app.use(cors())
 
 
+//handling error 
+app.use(async(err,req,res,next)=>{
+  res.status(err.status || 500)
+
+  res.send({
+    error:{
+        status:err.status || 500,
+        message:err.message
+     }
+  })
+})
 
 
 export default app
