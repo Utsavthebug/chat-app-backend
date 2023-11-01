@@ -8,7 +8,7 @@ import fileUpload from 'express-fileupload'
 import cors from 'cors'
 import compression from 'compression'
 import createHttpError from 'http-errors';
-
+import routes from './routes/index.js'
 //dotenv config
 dotenv.config()
 
@@ -47,6 +47,8 @@ app.use(fileUpload({
 
 //cors
 app.use(cors())
+
+app.use('/api/v1',routes)
 
 
 //handling error 
