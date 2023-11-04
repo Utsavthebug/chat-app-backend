@@ -4,7 +4,9 @@ import logger from "./configs/logger.config.js";
 
 //env variables
 const PORT = process.env.PORT || 8000
-const {DATEBASE_URL} = process.env
+const {DATABASE_URL} = process.env
+
+console.log(process.env.PORT)
 
 //handke errors after initial connection 
 mongoose.connection.on('error',err =>{
@@ -14,10 +16,7 @@ mongoose.connection.on('error',err =>{
 
 
 //mongodb connection
-mongoose.connect(DATEBASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }).then(()=>{
+mongoose.connect(DATABASE_URL).then(()=>{
     logger.info('Connected to mongodb')
   })
 

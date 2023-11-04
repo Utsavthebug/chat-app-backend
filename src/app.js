@@ -53,6 +53,7 @@ app.use('/api/v1',routes)
 
 //handling error 
 app.use(async(err,req,res,next)=>{
+  console.log(err)
   res.status(err.status || 500)
 
   res.send({
