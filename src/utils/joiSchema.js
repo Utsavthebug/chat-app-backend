@@ -28,8 +28,8 @@ export const createUserSchema = Joi.object({
     'string.max':'Please make sure you password should not exceed 128 characters',
     'string.min':'Please make sure you password is not less than 6 characters'
    }),
+   picture:Joi.string().allow("",null),
    status: Joi.string().max(64).messages({
     'string.max':'Please make sure your status is less than 64 characters'
-   }),
-   picture:Joi.string()
+   }).allow("",null),
 }) 

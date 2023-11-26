@@ -7,7 +7,6 @@ const {DEFAULT_PICTURE,DEFAULT_STATUS} = process.env
 
 export const createUser = async(userData)=>{
    const {name,email,picture,status,password} = userData
-
    //validation using joi schema
     const {error,value} = createUserSchema.validate(userData)
    

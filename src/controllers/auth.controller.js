@@ -15,7 +15,7 @@ export const register = tryCatch(async(req,res)=>{
     })
 
     //generating access_token 
-    const access_token = generateToken({
+    const access_token = await generateToken({
         userId:newUser?._id
     },
     process.env.ACCESS_TOKEN_SECRET,
@@ -23,7 +23,7 @@ export const register = tryCatch(async(req,res)=>{
     )
 
     //generating refresh token 
-    const refresh_token = generateToken({
+    const refresh_token = await generateToken({
         userId:newUser?._id
     },
     process.env.REFRESH_TOKEN_SECRET,
@@ -58,15 +58,15 @@ export const login = tryCatch(async(req,res)=>{
 
 
      //generating access_token 
-     const access_token = generateToken({
-        userId:newUser?._id
+     const access_token = await generateToken({
+        userId:user?._id
     },
     process.env.ACCESS_TOKEN_SECRET,
     "1d"
     )
 
     //generating refresh token 
-    const refresh_token = generateToken({
+    const refresh_token = await generateToken({
         userId:user?._id
     },
     process.env.REFRESH_TOKEN_SECRET,

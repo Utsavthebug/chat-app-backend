@@ -1,7 +1,7 @@
 import createHttpError from "http-errors";
 import jwt from 'jsonwebtoken'
 
-export default async function (req,res,next){
+export default async function authMiddleware (req,res,next){
     if(!req.headers['authorization']) return next(createHttpError.Unauthorized())
 
     const bearerToken = req.headers['authorization'];
