@@ -44,7 +44,7 @@ export const register = tryCatch(async(req,res)=>{
             email:newUser?.email,
             picture:newUser?.picture,
             status:newUser?.status,
-            access_token,
+            token:access_token,
 
         }
     })
@@ -87,7 +87,7 @@ export const login = tryCatch(async(req,res)=>{
             email:user?.email,
             picture:user?.picture,
             status:user?.status,
-            access_token,
+            token:access_token,
 
         }
     })
