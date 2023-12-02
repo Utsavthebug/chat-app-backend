@@ -2,7 +2,7 @@ import createHttpError from 'http-errors'
 import {ConversationModel, UserModel} from '../models/index.js'
 
 export const doesConversationExist = async(sender_id,receiver_id) =>{
-    let convo = await ConversationModel.findOne({
+    let convos = await ConversationModel.find({
         isGroup:false,
         users : {
             $all : [sender_id,receiver_id]
@@ -10,10 +10,10 @@ export const doesConversationExist = async(sender_id,receiver_id) =>{
 
     }).populate("users",'-password').populate("latestMessage")
 
-    if(!convo) throw createHttpError.BadRequest('Something went wrong!')
+    if(!convos) throw createHttpError.BadRequest('Something went wrong!')
 
     //populate message model
-    return convo
+    return convos[0]
 }
 
 export const updateLatestMessage = async (convo_id,message)=>{

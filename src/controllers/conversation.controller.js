@@ -2,7 +2,7 @@ import createHttpError from "http-errors"
 import logger from "../configs/logger.config.js"
 import tryCatch from "../utils/tryCatch.js"
 import { findUser } from "../services/user.service.js"
-import { createConversation, populateConversation } from "../services/conversation.service.js"
+import { createConversation, doesConversationExist, getUserConversations, populateConversation } from "../services/conversation.service.js"
 
 export const create_open_conversation = tryCatch(async(req,res)=>{
     const sender_id = req.user.userId
@@ -15,7 +15,7 @@ export const create_open_conversation = tryCatch(async(req,res)=>{
     }
     //check if chat exists 
     const existed_conversation = await doesConversationExist(sender_id,receiver_id)
-
+    console.log('xxx',existed_conversation)
     if(existed_conversation){
         return res.json(existed_conversation)
     }
@@ -25,6 +25,7 @@ export const create_open_conversation = tryCatch(async(req,res)=>{
 
         let convoData = {
             name : receiver_user.name,
+            picture:receiver_user?.picture,
             isGroup:false,
             users:[sender_id,receiver_id]
         }
@@ -41,5 +42,5 @@ export const getConversations = tryCatch(async(req,res)=>{
 
     const conversations = await getUserConversations(user_id)
 
-    res.status(200).json(conversations)
+    res.status(200).json(conversations ||  [])
 })

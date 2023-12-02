@@ -8,6 +8,10 @@ const conversationSchema = mongoose.Schema({
         trim:true,
         required:[true,"Conversation is required"]
     },
+    picture:{
+        type:String,
+        required:true,
+    },
     isGroup:{
         type:Boolean,
         required:true,
