@@ -44,11 +44,11 @@ export const populateConversation = async(id,fieldsToPopulate,fieldsToRemove) =>
 
 export const getUserConversations = async (user_id) =>{
     let conversations ;
-    ConversationModel.find({
+   await ConversationModel.find({
         users:{$elemMatch : {$eq : user_id}}
     }).populate('users','-password')
     .populate('admin','-password')
-    .populate('latestMessge')
+    .populate('latestMessage')
     .sort({updatedAt:-1}).then(async(results)=>{
         results = await UserModel.populate(results,{
             path:"latestMessage.sender",

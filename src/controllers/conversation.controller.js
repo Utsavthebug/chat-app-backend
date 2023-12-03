@@ -15,7 +15,6 @@ export const create_open_conversation = tryCatch(async(req,res)=>{
     }
     //check if chat exists 
     const existed_conversation = await doesConversationExist(sender_id,receiver_id)
-    console.log('xxx',existed_conversation)
     if(existed_conversation){
         return res.json(existed_conversation)
     }
@@ -41,6 +40,7 @@ export const getConversations = tryCatch(async(req,res)=>{
     const user_id = req.user.userId 
 
     const conversations = await getUserConversations(user_id)
+
 
     res.status(200).json(conversations ||  [])
 })
