@@ -10,7 +10,7 @@ export const searchUsers = tryCatch(async(req,res)=>{
         throw createHttpError.BadRequest("PLease fill all the fields")
     }
 
-    const users = await searchUsersService(keyword)
+    const users = await searchUsersService(keyword,req.user.userId)
     res.status(200).json(users)
 
 })
