@@ -36,7 +36,16 @@ export default function(socket,io){
             if(user._id===message.sender._id) return
             socket.in(user._id).emit('message received',message)
         })
-
-
     })
+
+//typing 
+
+socket.on('typing',(conversation)=>{
+    socket.in(conversation).emit('typing',conversation)
+})
+
+socket.on('stop typing',(conversation)=>{
+    socket.in(conversation).emit('stop typing',conversation)
+})
+
 }
